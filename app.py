@@ -531,14 +531,32 @@ def call_huggingface_model(
                 temperature=0.7,
             )
             return response.choices[0].message.content or ""
-        except Exception:
-            combined_prompt = f"{system_prompt}\n\nUser: {user_prompt}\n\nAssistant:"
-            return client.text_generation(
-                prompt=combined_prompt,
-                model=model_id,
-                max_new_tokens=650,
-                temperature=0.7,
-            )
+        except Exception as chat_err:
+            chat_err_str = str(chat_err)
+            # If the error is about model availability, provider permissions, or credit billing,
+            # do not attempt text_generation fallback as it causes misleading task errors.
+            if "model_not_supported" in chat_err_str or "not supported by any provider" in chat_err_str:
+                raise RuntimeError(
+                    f"Model '{model_id}' is not routed on free Serverless tier by Hugging Face without partner credits. "
+                    "👉 Switch to 'Local Ollama (100% Offline)' in the sidebar for unlimited, instant generation!"
+                ) from chat_err
+            if "402" in chat_err_str or "credits" in chat_err_str.lower():
+                raise RuntimeError(
+                    "Hugging Face Inference Provider requires pre-paid credits for cloud routing. "
+                    "👉 Switch to 'Local Ollama (100% Offline)' in the sidebar to generate for free with your local model!"
+                ) from chat_err
+
+            # Try fallback to legacy text_generation for non-chat base models
+            try:
+                combined_prompt = f"{system_prompt}\n\nUser: {user_prompt}\n\nAssistant:"
+                return client.text_generation(
+                    prompt=combined_prompt,
+                    model=model_id,
+                    max_new_tokens=650,
+                    temperature=0.7,
+                )
+            except Exception:
+                raise chat_err
 
     except Exception as e:
         error_msg = str(e)
@@ -555,7 +573,17 @@ def call_huggingface_model(
             raise RuntimeError(
                 "Hugging Face rate limit reached. Please wait a moment before trying again."
             ) from e
-        raise RuntimeError(f"Inference error: {error_msg}") from e
+        if "model_not_supported" in error_msg or "not supported by any provider" in error_msg:
+            raise RuntimeError(
+                f"Model '{model_id}' is not available on free serverless cloud routing. "
+                "👉 Switch to 'Local Ollama (100% Offline)' in the sidebar for instant local generation!"
+            ) from e
+        if "402" in error_msg or "credits" in error_msg.lower():
+            raise RuntimeError(
+                "Hugging Face Inference Provider credits needed. "
+                "👉 Switch to 'Local Ollama (100% Offline)' in the sidebar to generate 100% free with your local model!"
+            ) from e
+        raise RuntimeError(f"{error_msg}") from e
 
 
 def call_local_ollama(
@@ -633,9 +661,12 @@ with st.sidebar:
         '<div style="font-weight: 900; font-size: 0.88rem; text-transform: uppercase; margin-bottom: 6px;">1. INFERENCE RUNTIME</div>',
         unsafe_allow_html=True,
     )
+    ollama_check_models = get_installed_ollama_models("http://localhost:11434")
+    default_runtime_idx = 1 if ollama_check_models else 0
     provider = st.radio(
         "1. INFERENCE RUNTIME",
         options=["Hugging Face Serverless (Cloud)", "Local Ollama (100% Offline)"],
+        index=default_runtime_idx,
         label_visibility="collapsed",
     )
 
