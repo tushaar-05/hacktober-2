@@ -26,7 +26,7 @@ OPEN_WEIGHT_MODELS: Dict[str, Dict[str, str]] = {
         "name": "Google Gemma 2 2B Instruct",
         "license": "Gemma Terms of Use (Open Weights)",
         "params": "2.6B Parameters",
-        "description": "Ultra-fast, razor-sharp instruction following. Featured HF26 partner model.",
+        "description": "Ultra-fast instruction following. Featured Hacktoberfest partner model.",
         "badge": "⚡ FEATURED GEMMA",
         "color": "#FFE600",
     },
@@ -89,32 +89,108 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# Neo-Brutalism Custom CSS Injection
+# Bulletproof Neo-Brutalism CSS Injection
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&display=swap');
 
-    /* Global Typography & Neo-Brutalist Foundation */
-    html, body, [class*="css"] {
+    /* Global Typography & Canvas */
+    html, body, [class*="css"], .stApp {
         font-family: 'Space Grotesk', -apple-system, sans-serif !important;
+        background-color: #FEFCE8 !important;
         color: #000000 !important;
     }
 
-    /* Main Container Backdrop */
-    .stApp {
-        background-color: #FEFCE8;
+    /* Force all text, paragraphs, spans, and labels to pure bold black */
+    p, span, div, h1, h2, h3, h4, h5, h6, strong, em {
+        color: #000000 !important;
+    }
+
+    /* Streamlit Widget Labels */
+    label, [data-testid="stWidgetLabel"] p, [data-testid="stWidgetLabel"] span {
+        color: #000000 !important;
+        font-weight: 900 !important;
+        font-size: 0.95rem !important;
+        letter-spacing: 0.02em !important;
+        text-transform: uppercase !important;
+    }
+
+    /* Radio Buttons in Sidebar */
+    [data-testid="stRadio"] label p, [data-testid="stRadio"] span {
+        color: #000000 !important;
+        font-weight: 800 !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Sidebar Background and Borders */
+    section[data-testid="stSidebar"] {
+        background-color: #FFFBEB !important;
+        border-right: 4px solid #000000 !important;
+    }
+    section[data-testid="stSidebar"] * {
+        color: #000000 !important;
+    }
+
+    /* All Text Inputs, Textareas, and Dropdown Boxes - Force Solid White with Thick Black Borders */
+    input, textarea, [data-baseweb="input"] input, [data-baseweb="textarea"] textarea {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        font-weight: 700 !important;
+        font-size: 0.95rem !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+    }
+    input::placeholder, textarea::placeholder {
+        color: #555555 !important;
+        font-weight: 600 !important;
+    }
+    div[data-baseweb="input"], div[data-baseweb="textarea"] {
+        background-color: #FFFFFF !important;
+        border: 3.5px solid #000000 !important;
+        border-radius: 0px !important;
+        box-shadow: 4px 4px 0px #000000 !important;
+    }
+    div[data-baseweb="base-input"] {
+        background-color: #FFFFFF !important;
+    }
+
+    /* Dropdown / Selectbox Containers */
+    div[data-baseweb="select"] > div {
+        background-color: #FFFFFF !important;
+        border: 3.5px solid #000000 !important;
+        border-radius: 0px !important;
+        box-shadow: 4px 4px 0px #000000 !important;
+        color: #000000 !important;
+        font-weight: 800 !important;
+    }
+    div[data-baseweb="select"] * {
+        color: #000000 !important;
+        background-color: #FFFFFF !important;
+    }
+    ul[data-baseweb="menu"], [data-baseweb="menu"] li {
+        background-color: #FFFFFF !important;
+        color: #000000 !important;
+        border: 2px solid #000000 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Streamlit Containers with Border */
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        background-color: #FFFFFF !important;
+        border: 3.5px solid #000000 !important;
+        border-radius: 0px !important;
+        box-shadow: 6px 6px 0px #000000 !important;
+        padding: 20px !important;
+        margin-bottom: 20px !important;
     }
 
     /* Neo-Brutalist Hero Banner */
     .nb-hero {
         background-color: #FFE600;
         border: 4px solid #000000;
-        box-shadow: 7px 7px 0px #000000;
-        border-radius: 0px;
+        box-shadow: 8px 8px 0px #000000;
         padding: 24px 28px;
         margin-bottom: 24px;
-        position: relative;
     }
     .nb-hero-title {
         font-size: 2.6rem;
@@ -127,75 +203,56 @@ st.markdown(
     }
     .nb-hero-subtitle {
         font-size: 1.05rem;
-        font-weight: 700;
+        font-weight: 800;
         color: #000000;
-        margin-top: 8px;
+        margin-top: 10px;
         margin-bottom: 0;
         background-color: #FFFFFF;
         display: inline-block;
-        padding: 4px 12px;
-        border: 2px solid #000000;
+        padding: 6px 14px;
+        border: 2.5px solid #000000;
         box-shadow: 3px 3px 0px #000000;
     }
     .nb-badge-pill {
         display: inline-block;
         background-color: #FF66C4;
         color: #000000;
-        font-weight: 800;
-        font-size: 0.85rem;
-        padding: 6px 14px;
-        border: 2.5px solid #000000;
-        box-shadow: 3px 3px 0px #000000;
+        font-weight: 900;
+        font-size: 0.9rem;
+        padding: 8px 16px;
+        border: 3px solid #000000;
+        box-shadow: 4px 4px 0px #000000;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        transform: rotate(-1deg);
+        transform: rotate(-1.5deg);
     }
 
-    /* Neo-Brutalist Cards */
-    .nb-card {
-        background-color: #FFFFFF;
-        border: 3.5px solid #000000;
-        box-shadow: 6px 6px 0px #000000;
-        border-radius: 0px;
-        padding: 22px 24px;
-        margin-bottom: 24px;
-        transition: all 0.15s ease-in-out;
-    }
+    /* Section Headers */
     .nb-card-header {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
         font-weight: 900;
         text-transform: uppercase;
-        letter-spacing: -0.01em;
-        padding: 6px 14px;
-        border: 2.5px solid #000000;
+        padding: 8px 16px;
+        border: 3px solid #000000;
         display: inline-block;
         margin-bottom: 16px;
-        box-shadow: 3px 3px 0px #000000;
+        box-shadow: 4px 4px 0px #000000;
     }
-    .nb-card-header-yellow {
-        background-color: #FFE600;
-    }
-    .nb-card-header-cyan {
-        background-color: #00E5FF;
-    }
-    .nb-card-header-pink {
-        background-color: #FF66C4;
-    }
-    .nb-card-header-green {
-        background-color: #00F5A0;
-    }
+    .nb-card-header-yellow { background-color: #FFE600; }
+    .nb-card-header-cyan { background-color: #00E5FF; }
+    .nb-card-header-pink { background-color: #FF66C4; }
+    .nb-card-header-green { background-color: #00F5A0; }
 
     /* Sticker Tags */
     .nb-sticker {
         display: inline-block;
         background-color: #FFFFFF;
         color: #000000;
-        border: 2px solid #000000;
-        box-shadow: 2.5px 2.5px 0px #000000;
-        padding: 6px 12px;
-        margin: 4px;
-        font-weight: 800;
-        font-size: 0.82rem;
+        border: 2.5px solid #000000;
+        box-shadow: 3px 3px 0px #000000;
+        padding: 6px 14px;
+        margin: 5px;
+        font-weight: 900;
+        font-size: 0.88rem;
         text-transform: uppercase;
     }
     .nb-sticker:nth-child(4n+1) { background-color: #FFE600; }
@@ -221,8 +278,8 @@ st.markdown(
     .nb-store-price-tag {
         display: inline-block;
         background-color: #00F5A0;
-        border: 2.5px solid #000000;
-        box-shadow: 3px 3px 0px #000000;
+        border: 3px solid #000000;
+        box-shadow: 3.5px 3.5px 0px #000000;
         font-size: 1.4rem;
         font-weight: 900;
         padding: 4px 14px;
@@ -232,7 +289,7 @@ st.markdown(
         background-color: #FFE600;
         color: #000000 !important;
         font-weight: 900;
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         text-transform: uppercase;
         letter-spacing: 0.04em;
         text-align: center;
@@ -248,14 +305,14 @@ st.markdown(
         box-shadow: 3px 3px 0px #000000;
     }
 
-    /* Buttons in Neo-Brutalism */
+    /* All Buttons */
     div.stButton > button {
         background-color: #FFFFFF !important;
         color: #000000 !important;
-        border: 3px solid #000000 !important;
-        box-shadow: 4px 4px 0px #000000 !important;
+        border: 3.5px solid #000000 !important;
+        box-shadow: 5px 5px 0px #000000 !important;
         border-radius: 0px !important;
-        font-weight: 800 !important;
+        font-weight: 900 !important;
         font-size: 0.95rem !important;
         text-transform: uppercase !important;
         transition: all 0.1s ease !important;
@@ -267,8 +324,8 @@ st.markdown(
     }
     div.stButton > button[kind="primary"] {
         background-color: #00F5A0 !important;
-        font-size: 1.2rem !important;
-        padding: 14px 28px !important;
+        font-size: 1.25rem !important;
+        padding: 16px 28px !important;
         box-shadow: 6px 6px 0px #000000 !important;
     }
     div.stButton > button[kind="primary"]:hover {
@@ -277,24 +334,16 @@ st.markdown(
         box-shadow: 3px 3px 0px #000000 !important;
     }
 
-    /* Input & Textarea Neo-Brutalist Borders */
-    div[data-baseweb="input"] > div, div[data-baseweb="textarea"] > div {
-        border: 2.5px solid #000000 !important;
-        border-radius: 0px !important;
+    /* Expanders */
+    details {
         background-color: #FFFFFF !important;
-        box-shadow: 3px 3px 0px #000000 !important;
-    }
-    div[data-baseweb="select"] > div {
-        border: 2.5px solid #000000 !important;
+        border: 3px solid #000000 !important;
+        box-shadow: 4px 4px 0px #000000 !important;
         border-radius: 0px !important;
-        background-color: #FFFFFF !important;
-        box-shadow: 3px 3px 0px #000000 !important;
     }
-
-    /* Sidebar Styling */
-    section[data-testid="stSidebar"] {
-        background-color: #F4F0EA;
-        border-right: 4px solid #000000;
+    summary {
+        font-weight: 900 !important;
+        color: #000000 !important;
     }
     </style>
     """,
@@ -485,8 +534,8 @@ def parse_model_output(raw_text: str) -> Dict[str, str]:
 with st.sidebar:
     st.markdown(
         """
-        <div style="background-color: #00F5A0; border: 3px solid #000; box-shadow: 4px 4px 0px #000; padding: 10px 14px; margin-bottom: 16px;">
-            <h2 style="margin: 0; font-size: 1.4rem; font-weight: 900; text-transform: uppercase;">⚡ AI ENGINE</h2>
+        <div style="background-color: #00F5A0; border: 3.5px solid #000; box-shadow: 4px 4px 0px #000; padding: 12px 14px; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: #000;">⚡ AI ENGINE</h2>
         </div>
         """,
         unsafe_allow_html=True,
@@ -509,26 +558,29 @@ with st.sidebar:
 
         st.markdown(
             f"""
-            <div style="background-color: {selected_model_meta['color']}; border: 2.5px solid #000; box-shadow: 3px 3px 0px #000; padding: 8px 12px; margin: 10px 0;">
-                <div style="font-weight: 900; font-size: 0.85rem;">{selected_model_meta['badge']}</div>
-                <div style="font-size: 0.8rem; font-weight: 700;">{selected_model_meta['params']} • {selected_model_meta['license']}</div>
+            <div style="background-color: {selected_model_meta['color']}; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 14px; margin: 12px 0;">
+                <div style="font-weight: 900; font-size: 0.9rem; color: #000;">{selected_model_meta['badge']}</div>
+                <div style="font-size: 0.85rem; font-weight: 800; color: #000; margin-top: 4px;">{selected_model_meta['params']} • {selected_model_meta['license']}</div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
         st.markdown("---")
-        st.markdown("### 🔑 API TOKEN")
+        st.markdown(
+            '<div style="font-weight: 900; font-size: 1.1rem; margin-bottom: 8px;">🔑 API TOKEN</div>',
+            unsafe_allow_html=True,
+        )
 
         detected_token = resolve_api_token("")
         if detected_token:
             st.markdown(
-                '<div class="nb-sticker" style="background-color: #00F5A0; width: 100%; text-align: center;">✅ TOKEN DETECTED (.env / secrets)</div>',
+                '<div class="nb-sticker" style="background-color: #00F5A0; width: 100%; text-align: center; margin: 0 0 10px 0;">✅ TOKEN DETECTED (.env / secrets)</div>',
                 unsafe_allow_html=True,
             )
         else:
             st.markdown(
-                '<div class="nb-sticker" style="background-color: #FFE600; width: 100%; text-align: center;">⚠️ NO TOKEN FOUND</div>',
+                '<div class="nb-sticker" style="background-color: #FFE600; width: 100%; text-align: center; margin: 0 0 10px 0;">⚠️ NO TOKEN FOUND</div>',
                 unsafe_allow_html=True,
             )
 
@@ -550,19 +602,22 @@ with st.sidebar:
             )
         active_token = resolve_api_token(manual_token)
     else:
-        st.markdown("### 💻 LOCAL OLLAMA")
+        st.markdown(
+            '<div style="font-weight: 900; font-size: 1.1rem; margin-bottom: 8px;">💻 LOCAL OLLAMA</div>',
+            unsafe_allow_html=True,
+        )
         ollama_host = st.text_input("HOST URL", value="http://localhost:11434")
 
         installed_models = get_installed_ollama_models(ollama_host)
         if installed_models:
             st.markdown(
-                f'<div class="nb-sticker" style="background-color: #00F5A0;">● CONNECTED ({len(installed_models)} MODELS)</div>',
+                f'<div class="nb-sticker" style="background-color: #00F5A0; width: 100%; text-align: center; margin-bottom: 10px;">● CONNECTED ({len(installed_models)} MODELS)</div>',
                 unsafe_allow_html=True,
             )
             ollama_model = st.selectbox("INSTALLED MODEL", options=installed_models, index=0)
         else:
             st.markdown(
-                '<div class="nb-sticker" style="background-color: #FF66C4;">⚠️ OLLAMA OFFLINE / NO MODELS</div>',
+                '<div class="nb-sticker" style="background-color: #FF66C4; width: 100%; text-align: center; margin-bottom: 10px;">⚠️ OLLAMA OFFLINE / NO MODELS</div>',
                 unsafe_allow_html=True,
             )
             ollama_model = st.text_input("MODEL TAG", value="gemma2:2b")
@@ -573,7 +628,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown(
         """
-        <div style="font-weight: 800; font-size: 0.78rem; text-transform: uppercase; text-align: center;">
+        <div style="font-weight: 900; font-size: 0.82rem; text-transform: uppercase; text-align: center; color: #000;">
             DEV Community Hacktoberfest 2026<br>
             <strong>Side Hustle Challenge • Week 2</strong>
         </div>
@@ -587,7 +642,7 @@ with st.sidebar:
 st.markdown(
     """
     <div class="nb-hero">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
             <div>
                 <h1 class="nb-hero-title">⚡ SELLSMART MINI</h1>
                 <div class="nb-hero-subtitle">
@@ -608,7 +663,10 @@ st.markdown(
 # -----------------------------------------------------------------------------
 preset_cols = st.columns([2, 1, 1])
 with preset_cols[0]:
-    st.markdown("**⚡ INSTANT PRESETS (1-CLICK FILL):**")
+    st.markdown(
+        '<div style="font-weight: 900; font-size: 1.05rem; color: #000000; padding: 8px 0;">⚡ INSTANT PRESETS (1-CLICK FILL):</div>',
+        unsafe_allow_html=True,
+    )
 with preset_cols[1]:
     if st.button("📓 LEATHER JOURNAL", use_container_width=True):
         st.session_state["prod_name"] = SAMPLE_PRESETS["Artisan Leather Journal"]["name"]
@@ -629,74 +687,76 @@ with preset_cols[2]:
 st.markdown("<br>", unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# Input Form Section (Neo-Brutalist Double Column)
+# Input Form Section (Wrapped in Neo-Brutalist Boxed Containers)
 # -----------------------------------------------------------------------------
 form_col1, form_col2 = st.columns([3, 2], gap="large")
 
 with form_col1:
-    st.markdown('<div class="nb-card-header nb-card-header-yellow">1. PRODUCT INTEL</div>', unsafe_allow_html=True)
+    with st.container(border=True):
+        st.markdown('<div class="nb-card-header nb-card-header-yellow">1. PRODUCT INTEL</div>', unsafe_allow_html=True)
 
-    product_name = st.text_input(
-        "PRODUCT TITLE / WORKING NAME *",
-        value=st.session_state.get("prod_name", ""),
-        placeholder="e.g. Handcrafted Vintage Leather Journal",
-    )
+        product_name = st.text_input(
+            "PRODUCT TITLE / WORKING NAME *",
+            value=st.session_state.get("prod_name", ""),
+            placeholder="e.g. Handcrafted Vintage Leather Journal",
+        )
 
-    product_features = st.text_area(
-        "KEY SPECIFICATIONS & FEATURES *",
-        value=st.session_state.get("prod_features", ""),
-        height=170,
-        placeholder=(
-            "- Hand-stitched full-grain Italian leather cover\n"
-            "- 200 unlined cotton deckle-edge pages\n"
-            "- Antique brass wrap-around C-clasp\n"
-            "- Travel size 7x5 inches, fountain pen friendly"
-        ),
-    )
+        product_features = st.text_area(
+            "KEY SPECIFICATIONS & FEATURES *",
+            value=st.session_state.get("prod_features", ""),
+            height=170,
+            placeholder=(
+                "- Hand-stitched full-grain Italian leather cover\n"
+                "- 200 unlined cotton deckle-edge pages\n"
+                "- Antique brass wrap-around C-clasp\n"
+                "- Travel size 7x5 inches, fountain pen friendly"
+            ),
+        )
 
-    target_audience = st.text_input(
-        "TARGET AUDIENCE (OPTIONAL)",
-        value=st.session_state.get("prod_audience", ""),
-        placeholder="e.g. Writers, artists, travelers, thoughtful gift shoppers",
-    )
+        target_audience = st.text_input(
+            "TARGET AUDIENCE (OPTIONAL)",
+            value=st.session_state.get("prod_audience", ""),
+            placeholder="e.g. Writers, artists, travelers, thoughtful gift shoppers",
+        )
 
 with form_col2:
-    st.markdown('<div class="nb-card-header nb-card-header-cyan">2. STORE SETTINGS</div>', unsafe_allow_html=True)
+    with st.container(border=True):
+        st.markdown('<div class="nb-card-header nb-card-header-cyan">2. STORE SETTINGS</div>', unsafe_allow_html=True)
 
-    platform_options = [
-        "Shopify / Brand Store",
-        "Etsy Marketplace",
-        "eBay Listing",
-        "Amazon Store",
-        "Social Commerce (Instagram / TikTok)",
-    ]
-    platform = st.selectbox(
-        "TARGET STOREFRONT",
-        options=platform_options,
-        index=0,
-    )
+        platform_options = [
+            "Shopify / Brand Store",
+            "Etsy Marketplace",
+            "eBay Listing",
+            "Amazon Store",
+            "Social Commerce (Instagram / TikTok)",
+        ]
+        platform = st.selectbox(
+            "TARGET STOREFRONT",
+            options=platform_options,
+            index=0,
+        )
 
-    tone_options = [
-        "Modern & Conversion-Focused",
-        "Artisan & Storytelling (Etsy / Heritage)",
-        "Luxury, Elegant & Premium",
-        "Bold & Punchy (Neo-Brutalist)",
-        "Minimalist & Direct",
-    ]
-    tone = st.selectbox(
-        "COPYWRITING TONE",
-        options=tone_options,
-        index=0,
-    )
+        tone_options = [
+            "Modern & Conversion-Focused",
+            "Artisan & Storytelling (Etsy / Heritage)",
+            "Luxury, Elegant & Premium",
+            "Bold & Punchy (Neo-Brutalist)",
+            "Minimalist & Direct",
+        ]
+        tone = st.selectbox(
+            "COPYWRITING TONE",
+            options=tone_options,
+            index=0,
+        )
 
-    price_input = st.text_input(
-        "DISPLAY PRICE ($ USD)",
-        value=st.session_state.get("prod_price", "45.00"),
-        placeholder="45.00",
-    )
+        price_input = st.text_input(
+            "DISPLAY PRICE ($ USD)",
+            value=st.session_state.get("prod_price", "45.00"),
+            placeholder="45.00",
+        )
 
-    st.markdown("<br>", unsafe_allow_html=True)
-    generate_btn = st.button("⚡ GENERATE LISTING NOW", type="primary", use_container_width=True)
+        st.markdown("<br>", unsafe_allow_html=True)
+        generate_btn = st.button("⚡ GENERATE LISTING NOW", type="primary", use_container_width=True)
 
 # -----------------------------------------------------------------------------
 # Execution & Validation Workflow
@@ -704,17 +764,17 @@ with form_col2:
 if generate_btn:
     if not product_name.strip():
         st.markdown(
-            '<div class="nb-card" style="background-color: #FFE600; border: 3px solid #000; font-weight: 800;">⚠️ MISSING TITLE: Please provide a product title!</div>',
+            '<div style="background-color: #FFE600; border: 3.5px solid #000; box-shadow: 5px 5px 0px #000; padding: 14px 18px; font-weight: 900; margin: 16px 0;">⚠️ MISSING TITLE: Please provide a product title!</div>',
             unsafe_allow_html=True,
         )
     elif not product_features.strip():
         st.markdown(
-            '<div class="nb-card" style="background-color: #FFE600; border: 3px solid #000; font-weight: 800;">⚠️ MISSING FEATURES: Please enter at least a few bullet points!</div>',
+            '<div style="background-color: #FFE600; border: 3.5px solid #000; box-shadow: 5px 5px 0px #000; padding: 14px 18px; font-weight: 900; margin: 16px 0;">⚠️ MISSING FEATURES: Please enter at least a few bullet points!</div>',
             unsafe_allow_html=True,
         )
     elif provider == "Hugging Face Serverless (Cloud)" and not active_token:
         st.markdown(
-            '<div class="nb-card" style="background-color: #FF66C4; border: 3px solid #000; font-weight: 800;">🔑 TOKEN REQUIRED: Please provide your free Hugging Face token in the sidebar or in your .env file!</div>',
+            '<div style="background-color: #FF66C4; border: 3.5px solid #000; box-shadow: 5px 5px 0px #000; padding: 14px 18px; font-weight: 900; margin: 16px 0;">🔑 TOKEN REQUIRED: Please provide your free Hugging Face token in the sidebar or in your .env file!</div>',
             unsafe_allow_html=True,
         )
     else:
@@ -749,7 +809,7 @@ if generate_btn:
             except Exception as exc:
                 error_occurred = True
                 st.markdown(
-                    f'<div class="nb-card" style="background-color: #FF66C4; border: 3px solid #000; font-weight: 800;">❌ ERROR: {exc}</div>',
+                    f'<div style="background-color: #FF66C4; border: 3.5px solid #000; box-shadow: 5px 5px 0px #000; padding: 14px 18px; font-weight: 900; margin: 16px 0;">❌ ERROR: {exc}</div>',
                     unsafe_allow_html=True,
                 )
 
@@ -764,7 +824,7 @@ if generate_btn:
                     st.session_state["last_model"] = model_choice
                     st.session_state["saved_price"] = price_input.strip() or "45.00"
                     st.markdown(
-                        f'<div class="nb-sticker" style="background-color: #00F5A0; font-size: 1rem; padding: 10px 16px;">⚡ GENERATED IN {elapsed}S WITH {model_choice}</div>',
+                        f'<div class="nb-sticker" style="background-color: #00F5A0; font-size: 1rem; padding: 10px 16px; margin: 16px 0;">⚡ GENERATED IN {elapsed}S WITH {model_choice}</div>',
                         unsafe_allow_html=True,
                     )
 
@@ -787,7 +847,7 @@ if "last_result" in st.session_state:
         if tag.strip()
     ]
 
-    st.markdown("<br><hr style='border: 2px solid #000;'>", unsafe_allow_html=True)
+    st.markdown("<br><hr style='border: 2.5px solid #000;'>", unsafe_allow_html=True)
 
     tab_preview, tab_copy, tab_seo = st.tabs(
         ["🛍️ LIVE STOREFRONT PREVIEW", "📋 MERCHANT CLIPBOARD", "🔍 GOOGLE SEO SNIPPET"]
@@ -798,16 +858,16 @@ if "last_result" in st.session_state:
         st.markdown(
             f"""
             <div class="nb-store-preview">
-                <div style="font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 8px;">
+                <div style="font-weight: 900; font-size: 0.88rem; text-transform: uppercase; margin-bottom: 8px; color: #000;">
                     HOME / CATALOG / <strong>{title_text}</strong>
                 </div>
                 <div class="nb-store-title">{title_text}</div>
                 <div class="nb-store-price-tag">${item_price} USD</div>
-                <div style="font-weight: 800; margin-bottom: 16px; color: #008060;">
+                <div style="font-weight: 900; margin-bottom: 16px; color: #008060;">
                     ● IN STOCK — READY TO SHIP
                 </div>
                 <div class="nb-btn-cart">🛒 ADD TO CART</div>
-                <div style="border-top: 3px solid #000; padding-top: 18px; margin-top: 18px; font-size: 1rem; line-height: 1.6; font-weight: 500;">
+                <div style="border-top: 3.5px solid #000; padding-top: 18px; margin-top: 18px; font-size: 1.05rem; line-height: 1.6; font-weight: 600; color: #000;">
                     {desc_text.replace(chr(10), '<br>')}
                 </div>
             </div>
@@ -848,14 +908,14 @@ if "last_result" in st.session_state:
 
         st.markdown(
             f"""
-            <div class="nb-card" style="background-color: #FFFFFF; border: 3px solid #000; box-shadow: 5px 5px 0px #000;">
-                <div style="color: #1A0DAB; font-size: 1.25rem; font-weight: 800; text-decoration: underline; margin-bottom: 4px;">
+            <div style="background-color: #FFFFFF; border: 3.5px solid #000; box-shadow: 6px 6px 0px #000; padding: 22px;">
+                <div style="color: #1A0DAB; font-size: 1.3rem; font-weight: 900; text-decoration: underline; margin-bottom: 6px;">
                     {title_text} | Official Store
                 </div>
-                <div style="color: #006621; font-size: 0.88rem; font-weight: 700; margin-bottom: 8px;">
+                <div style="color: #006621; font-size: 0.92rem; font-weight: 800; margin-bottom: 10px;">
                     https://your-store.com/products/{url_slug}
                 </div>
-                <div style="font-size: 0.95rem; font-weight: 500; color: #333333;">
+                <div style="font-size: 1rem; font-weight: 600; color: #111111; line-height: 1.5;">
                     {truncated_desc}
                 </div>
             </div>
