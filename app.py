@@ -134,9 +134,6 @@ st.markdown(
         padding-left: 1rem !important;
         padding-right: 1rem !important;
     }
-    section[data-testid="stSidebar"] * {
-        color: #000000 !important;
-    }
 
     /* Streamlit Widget Labels */
     label, [data-testid="stWidgetLabel"] p, [data-testid="stWidgetLabel"] span {
@@ -664,7 +661,7 @@ with st.sidebar:
             <div style="background-color: {selected_model_meta['color']}; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-top: 8px; margin-bottom: 14px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <span style="font-weight: 900; font-size: 0.82rem; text-transform: uppercase; color: #000;">{selected_model_meta['badge']}</span>
-                    <span style="background: #000; color: #FFF; font-weight: 900; font-size: 0.72rem; padding: 2px 6px;">{selected_model_meta['params']}</span>
+                    <span style="background-color: #FFFFFF; color: #000000; border: 2px solid #000; font-weight: 900; font-size: 0.75rem; padding: 2px 8px; box-shadow: 1.5px 1.5px 0px #000;">{selected_model_meta['params']}</span>
                 </div>
                 <div style="font-size: 0.76rem; font-weight: 800; color: #111;">
                     LICENSE: {selected_model_meta['license']}
@@ -689,7 +686,7 @@ with st.sidebar:
                 <div style="background-color: #00F5A0; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="font-weight: 900; font-size: 0.82rem; color: #000;">🔑 HF TOKEN</span>
-                        <span style="background: #000; color: #00F5A0; font-weight: 900; font-size: 0.72rem; padding: 2px 6px;">● ACTIVE</span>
+                        <span style="background-color: #FFFFFF; color: #000000; border: 2px solid #000; font-weight: 900; font-size: 0.75rem; padding: 2px 8px; box-shadow: 1.5px 1.5px 0px #000;">● ACTIVE</span>
                     </div>
                     <div style="font-size: 0.76rem; font-weight: 800; margin-top: 3px; color: #000;">
                         Ready: Loaded from .env
@@ -712,7 +709,7 @@ with st.sidebar:
                 <div style="background-color: #FFE600; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-bottom: 8px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="font-weight: 900; font-size: 0.82rem; color: #000;">🔑 TOKEN NEEDED</span>
-                        <span style="background: #FF66C4; color: #000; font-weight: 900; font-size: 0.72rem; padding: 2px 6px;">FREE</span>
+                        <span style="background-color: #FFFFFF; color: #000000; border: 2px solid #000; font-weight: 900; font-size: 0.75rem; padding: 2px 8px; box-shadow: 1.5px 1.5px 0px #000;">FREE</span>
                     </div>
                     <div style="font-size: 0.76rem; font-weight: 800; margin-top: 3px; color: #111;">
                         Paste your free Hugging Face token:
@@ -770,73 +767,31 @@ with st.sidebar:
         active_token = None
         model_choice = ollama_model
 
-    # 5. Footer Hacktoberfest Stamp Card
-    st.markdown(
-        """
-        <div style="background-color: #FFFFFF; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-top: 14px; text-align: center;">
-            <div style="font-size: 0.72rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: #000;">🏆 DEV HACKTOBERFEST 2026</div>
-            <div style="font-size: 0.88rem; font-weight: 900; margin: 2px 0; color: #000;">WEEK 2: SIDE HUSTLE</div>
-            <div style="font-size: 0.72rem; font-weight: 800; color: #444;">OPEN-WEIGHT AI CHALLENGE</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    # (Footer stamp removed for clean, minimal layout)
 
 # -----------------------------------------------------------------------------
-# Main Header: Neo-Brutalist Hero Banner
+# Main Header: Clean, Simple, Direct
 # -----------------------------------------------------------------------------
 st.markdown(
     """
-    <div class="nb-hero">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-            <div style="flex: 1 1 500px;">
-                <div style="display: inline-block; background-color: #FFFFFF; color: #000000 !important; font-weight: 900; font-size: 0.8rem; padding: 4px 10px; border: 2.5px solid #000; box-shadow: 2.5px 2.5px 0px #000; margin-bottom: 8px; text-transform: uppercase;">
-                    ★ OPEN-WEIGHT AI • SIDE HUSTLE SUITE ★
-                </div>
-                <h1 class="nb-hero-title">⚡ SELLSMART MINI</h1>
-                <div class="nb-hero-subtitle">
-                    TURBOCHARGE YOUR ETSY, SHOPIFY & EBAY PRODUCT LISTINGS IN SECONDS
-                </div>
-            </div>
-            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
-                <span class="nb-badge-pill">NEO-BRUTALIST V2</span>
-                <div style="display: flex; gap: 8px;">
-                    <div style="background: #FFFFFF; border: 2.5px solid #000; box-shadow: 2.5px 2.5px 0px #000; padding: 6px 12px; text-align: center;">
-                        <div style="font-weight: 900; font-size: 1.15rem; line-height: 1; color: #000;">3</div>
-                        <div style="font-weight: 900; font-size: 0.68rem; text-transform: uppercase; color: #000;">MODELS</div>
-                    </div>
-                    <div style="background: #00F5A0; border: 2.5px solid #000; box-shadow: 2.5px 2.5px 0px #000; padding: 6px 12px; text-align: center;">
-                        <div style="font-weight: 900; font-size: 1.15rem; line-height: 1; color: #000;">$0</div>
-                        <div style="font-weight: 900; font-size: 0.68rem; text-transform: uppercase; color: #000;">FEES</div>
-                    </div>
-                    <div style="background: #FF66C4; border: 2.5px solid #000; box-shadow: 2.5px 2.5px 0px #000; padding: 6px 12px; text-align: center;">
-                        <div style="font-weight: 900; font-size: 1.15rem; line-height: 1; color: #000;">100%</div>
-                        <div style="font-weight: 900; font-size: 0.68rem; text-transform: uppercase; color: #000;">PRIVATE</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="nb-hero" style="padding: 20px 24px; margin-bottom: 20px;">
+        <h1 class="nb-hero-title" style="font-size: 2.2rem; margin: 0; line-height: 1.2;">
+            🛍️ SellSmart Mini
+        </h1>
+        <p style="font-size: 1rem; font-weight: 700; color: #000; margin: 6px 0 0 0;">
+            AI-powered product description and SEO keyword generator for online sellers.
+        </p>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
 # -----------------------------------------------------------------------------
-# Dedicated Quick Preset Command Bar
+# Quick Preset Buttons (Clean & Direct)
 # -----------------------------------------------------------------------------
-st.markdown(
-    """
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
-        <span class="nb-sticker" style="background-color: #FFE600; margin: 0; font-size: 0.88rem;">⚡ 1-CLICK DEMO CATALOG PRESETS</span>
-        <span style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: #333;">CLICK ANY PRESET TO TEST WITH REAL-WORLD SPECS</span>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
 preset_cols = st.columns([1, 1, 1])
 with preset_cols[0]:
-    if st.button("📓 LEATHER JOURNAL (ETSY)", use_container_width=True):
+    if st.button("📓 Sample: Leather Journal", use_container_width=True):
         st.session_state["prod_name"] = SAMPLE_PRESETS["Artisan Leather Journal"]["name"]
         st.session_state["prod_features"] = SAMPLE_PRESETS["Artisan Leather Journal"]["features"]
         st.session_state["prod_audience"] = SAMPLE_PRESETS["Artisan Leather Journal"]["audience"]
@@ -844,7 +799,7 @@ with preset_cols[0]:
         st.session_state["prod_platform"] = SAMPLE_PRESETS["Artisan Leather Journal"]["platform"]
         st.session_state["prod_price"] = SAMPLE_PRESETS["Artisan Leather Journal"]["price"]
 with preset_cols[1]:
-    if st.button("☕ CERAMIC MUG (SHOPIFY)", use_container_width=True):
+    if st.button("☕ Sample: Ceramic Mug", use_container_width=True):
         st.session_state["prod_name"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["name"]
         st.session_state["prod_features"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["features"]
         st.session_state["prod_audience"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["audience"]
@@ -852,13 +807,13 @@ with preset_cols[1]:
         st.session_state["prod_platform"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["platform"]
         st.session_state["prod_price"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["price"]
 with preset_cols[2]:
-    if st.button("🧹 CLEAR / RESET FORM", use_container_width=True):
+    if st.button("🧹 Clear Fields", use_container_width=True):
         st.session_state["prod_name"] = ""
         st.session_state["prod_features"] = ""
         st.session_state["prod_audience"] = ""
         st.session_state["prod_price"] = "45.00"
 
-st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
+st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
 # Input Form Section (Wrapped in Neo-Brutalist Boxed Containers)
