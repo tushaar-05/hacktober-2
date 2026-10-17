@@ -25,7 +25,7 @@ OPEN_WEIGHT_MODELS: Dict[str, Dict[str, str]] = {
     "google/gemma-2-2b-it": {
         "name": "Google Gemma 2 2B Instruct",
         "license": "Gemma Terms of Use (Open Weights)",
-        "params": "2.6B Parameters",
+        "params": "2.6B Params",
         "description": "Ultra-fast instruction following. Featured Hacktoberfest partner model.",
         "badge": "⚡ FEATURED GEMMA",
         "color": "#FFE600",
@@ -33,7 +33,7 @@ OPEN_WEIGHT_MODELS: Dict[str, Dict[str, str]] = {
     "meta-llama/Llama-3.2-3B-Instruct": {
         "name": "Meta Llama 3.2 3B Instruct",
         "license": "Llama 3.2 Community License",
-        "params": "3.2B Parameters",
+        "params": "3.2B Params",
         "description": "Edge-optimized reasoning with high-conversion e-commerce copywriting.",
         "badge": "🔥 POPULAR PICK",
         "color": "#00F5A0",
@@ -41,7 +41,7 @@ OPEN_WEIGHT_MODELS: Dict[str, Dict[str, str]] = {
     "Qwen/Qwen2.5-7B-Instruct": {
         "name": "Qwen 2.5 7B Instruct",
         "license": "Apache 2.0 (Permissive)",
-        "params": "7.6B Parameters",
+        "params": "7.6B Params",
         "description": "High-capacity creative storytelling and structured SEO tag generation.",
         "badge": "💎 APACHE 2.0",
         "color": "#FF66C4",
@@ -107,57 +107,86 @@ st.markdown(
         color: #000000 !important;
     }
 
+    /* =========================================================================
+       SIDEBAR: HIDE UNWANTED SCROLLBAR & TIGHTEN COMPACT PADDING
+       ========================================================================= */
+    section[data-testid="stSidebar"] {
+        background-color: #FFFBEB !important;
+        border-right: 4px solid #000000 !important;
+        overflow-x: hidden !important;
+    }
+    section[data-testid="stSidebar"]::-webkit-scrollbar,
+    section[data-testid="stSidebar"] > div::-webkit-scrollbar,
+    section[data-testid="stSidebar"] div::-webkit-scrollbar {
+        display: none !important;
+        width: 0px !important;
+        height: 0px !important;
+        background: transparent !important;
+    }
+    section[data-testid="stSidebar"],
+    section[data-testid="stSidebar"] > div {
+        -ms-overflow-style: none !important;
+        scrollbar-width: none !important;
+    }
+    section[data-testid="stSidebar"] .block-container {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+    section[data-testid="stSidebar"] * {
+        color: #000000 !important;
+    }
+
     /* Streamlit Widget Labels */
     label, [data-testid="stWidgetLabel"] p, [data-testid="stWidgetLabel"] span {
         color: #000000 !important;
         font-weight: 900 !important;
-        font-size: 0.95rem !important;
+        font-size: 0.92rem !important;
         letter-spacing: 0.02em !important;
         text-transform: uppercase !important;
+        margin-bottom: 4px !important;
     }
 
     /* Radio Buttons in Sidebar */
     [data-testid="stRadio"] label p, [data-testid="stRadio"] span {
         color: #000000 !important;
         font-weight: 800 !important;
-        font-size: 0.9rem !important;
+        font-size: 0.88rem !important;
     }
 
-    /* Sidebar Background and Borders */
-    section[data-testid="stSidebar"] {
-        background-color: #FFFBEB !important;
-        border-right: 4px solid #000000 !important;
+    /* =========================================================================
+       TEXT INPUTS & TEXTAREAS - CRISP WHITE WITH THICK BLACK OUTLINE
+       ========================================================================= */
+    [data-testid="stTextInputRootElement"] > div,
+    [data-testid="stTextAreaRootElement"] > div,
+    div[data-baseweb="input"],
+    div[data-baseweb="textarea"],
+    div[data-baseweb="base-input"] {
+        background-color: #FFFFFF !important;
+        border: 3px solid #000000 !important;
+        border-radius: 0px !important;
+        box-shadow: 4px 4px 0px #000000 !important;
     }
-    section[data-testid="stSidebar"] * {
-        color: #000000 !important;
-    }
-
-    /* All Text Inputs, Textareas, and Dropdown Boxes - Force Solid White with Thick Black Borders */
-    input, textarea, [data-baseweb="input"] input, [data-baseweb="textarea"] textarea {
+    input, textarea,
+    [data-baseweb="input"] input,
+    [data-baseweb="textarea"] textarea {
         background-color: #FFFFFF !important;
         color: #000000 !important;
         font-weight: 700 !important;
         font-size: 0.95rem !important;
         font-family: 'Space Grotesk', sans-serif !important;
+        border: none !important;
     }
     input::placeholder, textarea::placeholder {
-        color: #555555 !important;
+        color: #666666 !important;
         font-weight: 600 !important;
-    }
-    div[data-baseweb="input"], div[data-baseweb="textarea"] {
-        background-color: #FFFFFF !important;
-        border: 3.5px solid #000000 !important;
-        border-radius: 0px !important;
-        box-shadow: 4px 4px 0px #000000 !important;
-    }
-    div[data-baseweb="base-input"] {
-        background-color: #FFFFFF !important;
     }
 
     /* Dropdown / Selectbox Containers */
     div[data-baseweb="select"] > div {
         background-color: #FFFFFF !important;
-        border: 3.5px solid #000000 !important;
+        border: 3px solid #000000 !important;
         border-radius: 0px !important;
         box-shadow: 4px 4px 0px #000000 !important;
         color: #000000 !important;
@@ -174,26 +203,28 @@ st.markdown(
         font-weight: 700 !important;
     }
 
-    /* Streamlit Containers with Border */
-    [data-testid="stVerticalBlockBorderWrapper"] {
+    /* =========================================================================
+       NEO-BRUTALIST CONTAINER CARDS (WHITE BOXES WITH HARD BLACK SHADOWS)
+       ========================================================================= */
+    [data-testid="stVerticalBlockBorderWrapper"] > div {
         background-color: #FFFFFF !important;
         border: 3.5px solid #000000 !important;
         border-radius: 0px !important;
-        box-shadow: 6px 6px 0px #000000 !important;
-        padding: 20px !important;
+        box-shadow: 7px 7px 0px #000000 !important;
+        padding: 24px !important;
         margin-bottom: 20px !important;
     }
 
-    /* Neo-Brutalist Hero Banner */
+    /* Hero Banner */
     .nb-hero {
         background-color: #FFE600;
         border: 4px solid #000000;
         box-shadow: 8px 8px 0px #000000;
-        padding: 24px 28px;
-        margin-bottom: 24px;
+        padding: 26px 30px;
+        margin-bottom: 22px;
     }
     .nb-hero-title {
-        font-size: 2.6rem;
+        font-size: 2.7rem;
         font-weight: 900;
         letter-spacing: -0.03em;
         text-transform: uppercase;
@@ -202,7 +233,7 @@ st.markdown(
         line-height: 1.1;
     }
     .nb-hero-subtitle {
-        font-size: 1.05rem;
+        font-size: 1rem;
         font-weight: 800;
         color: #000000;
         margin-top: 10px;
@@ -228,19 +259,33 @@ st.markdown(
 
     /* Section Headers */
     .nb-card-header {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         font-weight: 900;
         text-transform: uppercase;
-        padding: 8px 16px;
-        border: 3px solid #000000;
+        padding: 6px 14px;
+        border: 2.5px solid #000000;
         display: inline-block;
         margin-bottom: 16px;
-        box-shadow: 4px 4px 0px #000000;
+        box-shadow: 3.5px 3.5px 0px #000000;
     }
     .nb-card-header-yellow { background-color: #FFE600; }
     .nb-card-header-cyan { background-color: #00E5FF; }
     .nb-card-header-pink { background-color: #FF66C4; }
     .nb-card-header-green { background-color: #00F5A0; }
+
+    /* Quick Preset Command Bar */
+    .nb-preset-bar {
+        background-color: #FFFFFF;
+        border: 3px solid #000000;
+        box-shadow: 5px 5px 0px #000000;
+        padding: 14px 18px;
+        margin-bottom: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
 
     /* Sticker Tags */
     .nb-sticker {
@@ -260,16 +305,16 @@ st.markdown(
     .nb-sticker:nth-child(4n+3) { background-color: #FF66C4; }
     .nb-sticker:nth-child(4n+4) { background-color: #00E5FF; }
 
-    /* Neo-Brutalist Storefront Live Preview Card */
+    /* Storefront Live Preview */
     .nb-store-preview {
         background-color: #FFFFFF;
         border: 4px solid #000000;
         box-shadow: 8px 8px 0px #000000;
-        padding: 26px;
-        margin-top: 10px;
+        padding: 28px;
+        margin-top: 14px;
     }
     .nb-store-title {
-        font-size: 1.85rem;
+        font-size: 1.95rem;
         font-weight: 900;
         line-height: 1.2;
         margin-bottom: 12px;
@@ -280,7 +325,7 @@ st.markdown(
         background-color: #00F5A0;
         border: 3px solid #000000;
         box-shadow: 3.5px 3.5px 0px #000000;
-        font-size: 1.4rem;
+        font-size: 1.45rem;
         font-weight: 900;
         padding: 4px 14px;
         margin-bottom: 16px;
@@ -309,11 +354,11 @@ st.markdown(
     div.stButton > button {
         background-color: #FFFFFF !important;
         color: #000000 !important;
-        border: 3.5px solid #000000 !important;
-        box-shadow: 5px 5px 0px #000000 !important;
+        border: 3px solid #000000 !important;
+        box-shadow: 4px 4px 0px #000000 !important;
         border-radius: 0px !important;
         font-weight: 900 !important;
-        font-size: 0.95rem !important;
+        font-size: 0.92rem !important;
         text-transform: uppercase !important;
         transition: all 0.1s ease !important;
     }
@@ -324,14 +369,33 @@ st.markdown(
     }
     div.stButton > button[kind="primary"] {
         background-color: #00F5A0 !important;
-        font-size: 1.25rem !important;
+        font-size: 1.2rem !important;
         padding: 16px 28px !important;
         box-shadow: 6px 6px 0px #000000 !important;
+        letter-spacing: 0.03em !important;
     }
     div.stButton > button[kind="primary"]:hover {
         background-color: #FFE600 !important;
         transform: translate(3px, 3px) !important;
         box-shadow: 3px 3px 0px #000000 !important;
+    }
+
+    /* Tabs in Neo-Brutalism */
+    button[data-baseweb="tab"] {
+        border: 2.5px solid #000000 !important;
+        background-color: #FFFFFF !important;
+        box-shadow: 3px 3px 0px #000000 !important;
+        font-weight: 900 !important;
+        margin-right: 8px !important;
+        border-radius: 0px !important;
+        color: #000000 !important;
+        padding: 8px 16px !important;
+        text-transform: uppercase !important;
+    }
+    button[data-baseweb="tab"][aria-selected="true"] {
+        background-color: #FFE600 !important;
+        box-shadow: 1px 1px 0px #000000 !important;
+        transform: translate(2px, 2px) !important;
     }
 
     /* Expanders */
@@ -340,6 +404,7 @@ st.markdown(
         border: 3px solid #000000 !important;
         box-shadow: 4px 4px 0px #000000 !important;
         border-radius: 0px !important;
+        margin-top: 8px !important;
     }
     summary {
         font-weight: 900 !important;
@@ -529,27 +594,27 @@ def parse_model_output(raw_text: str) -> Dict[str, str]:
 
 
 # -----------------------------------------------------------------------------
-# Neo-Brutalist Sidebar: AI Engine & Provider Controls
+# Neo-Brutalist Sidebar: AI Engine & Compact Controls (No Scrollbar)
 # -----------------------------------------------------------------------------
 with st.sidebar:
     st.markdown(
         """
-        <div style="background-color: #00F5A0; border: 3.5px solid #000; box-shadow: 4px 4px 0px #000; padding: 12px 14px; margin-bottom: 20px;">
-            <h2 style="margin: 0; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: #000;">⚡ AI ENGINE</h2>
+        <div style="background-color: #00F5A0; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-bottom: 14px;">
+            <h2 style="margin: 0; font-size: 1.35rem; font-weight: 900; text-transform: uppercase; color: #000;">⚡ AI ENGINE</h2>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
     provider = st.radio(
-        "CHOOSE INFERENCE MODE",
+        "INFERENCE MODE",
         options=["Hugging Face Serverless (Cloud)", "Local Ollama (100% Offline)"],
         help="Select between free cloud serverless inference or 100% offline local inference.",
     )
 
     if provider == "Hugging Face Serverless (Cloud)":
         model_choice = st.selectbox(
-            "SELECT OPEN-WEIGHT MODEL",
+            "OPEN-WEIGHT MODEL",
             options=list(OPEN_WEIGHT_MODELS.keys()),
             index=0,
             format_func=lambda m: f"{OPEN_WEIGHT_MODELS[m]['name']}",
@@ -558,66 +623,55 @@ with st.sidebar:
 
         st.markdown(
             f"""
-            <div style="background-color: {selected_model_meta['color']}; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 14px; margin: 12px 0;">
-                <div style="font-weight: 900; font-size: 0.9rem; color: #000;">{selected_model_meta['badge']}</div>
-                <div style="font-size: 0.85rem; font-weight: 800; color: #000; margin-top: 4px;">{selected_model_meta['params']} • {selected_model_meta['license']}</div>
+            <div style="background-color: {selected_model_meta['color']}; border: 2.5px solid #000; box-shadow: 3px 3px 0px #000; padding: 8px 12px; margin: 8px 0;">
+                <div style="font-weight: 900; font-size: 0.85rem; color: #000;">{selected_model_meta['badge']}</div>
+                <div style="font-size: 0.8rem; font-weight: 800; color: #000; margin-top: 2px;">{selected_model_meta['params']} • {selected_model_meta['license']}</div>
             </div>
             """,
-            unsafe_allow_html=True,
-        )
-
-        st.markdown("---")
-        st.markdown(
-            '<div style="font-weight: 900; font-size: 1.1rem; margin-bottom: 8px;">🔑 API TOKEN</div>',
             unsafe_allow_html=True,
         )
 
         detected_token = resolve_api_token("")
         if detected_token:
             st.markdown(
-                '<div class="nb-sticker" style="background-color: #00F5A0; width: 100%; text-align: center; margin: 0 0 10px 0;">✅ TOKEN DETECTED (.env / secrets)</div>',
+                '<div class="nb-sticker" style="background-color: #00F5A0; width: 100%; text-align: center; margin: 6px 0;">✅ TOKEN DETECTED</div>',
                 unsafe_allow_html=True,
             )
         else:
             st.markdown(
-                '<div class="nb-sticker" style="background-color: #FFE600; width: 100%; text-align: center; margin: 0 0 10px 0;">⚠️ NO TOKEN FOUND</div>',
+                '<div class="nb-sticker" style="background-color: #FFE600; width: 100%; text-align: center; margin: 6px 0;">⚠️ NO TOKEN FOUND</div>',
                 unsafe_allow_html=True,
             )
 
         manual_token = st.text_input(
-            "OVERRIDE SESSION TOKEN",
+            "OVERRIDE TOKEN",
             type="password",
-            placeholder="hf_xxxxxxxxxxxxxxxxxxxxxxxx",
-            help="Session memory only. Never committed to git.",
+            placeholder="hf_xxxxxxxxxxxxxxxx",
+            help="Session memory only. Never committed.",
         )
 
-        with st.expander("❓ GET FREE HF TOKEN"):
+        with st.expander("❓ GET FREE TOKEN"):
             st.markdown(
                 """
                 1. Sign up at [huggingface.co](https://huggingface.co/join).
-                2. Visit [Access Tokens](https://huggingface.co/settings/tokens).
-                3. Create a **Read** token.
-                4. Put `HF_TOKEN=hf_...` in `.env`.
+                2. Create a **Read** token at [Tokens](https://huggingface.co/settings/tokens).
+                3. Add `HF_TOKEN=hf_...` in `.env`.
                 """
             )
         active_token = resolve_api_token(manual_token)
     else:
-        st.markdown(
-            '<div style="font-weight: 900; font-size: 1.1rem; margin-bottom: 8px;">💻 LOCAL OLLAMA</div>',
-            unsafe_allow_html=True,
-        )
         ollama_host = st.text_input("HOST URL", value="http://localhost:11434")
 
         installed_models = get_installed_ollama_models(ollama_host)
         if installed_models:
             st.markdown(
-                f'<div class="nb-sticker" style="background-color: #00F5A0; width: 100%; text-align: center; margin-bottom: 10px;">● CONNECTED ({len(installed_models)} MODELS)</div>',
+                f'<div class="nb-sticker" style="background-color: #00F5A0; width: 100%; text-align: center; margin-bottom: 6px;">● ONLINE ({len(installed_models)} MODELS)</div>',
                 unsafe_allow_html=True,
             )
             ollama_model = st.selectbox("INSTALLED MODEL", options=installed_models, index=0)
         else:
             st.markdown(
-                '<div class="nb-sticker" style="background-color: #FF66C4; width: 100%; text-align: center; margin-bottom: 10px;">⚠️ OLLAMA OFFLINE / NO MODELS</div>',
+                '<div class="nb-sticker" style="background-color: #FF66C4; width: 100%; text-align: center; margin-bottom: 6px;">⚠️ NO MODELS FOUND</div>',
                 unsafe_allow_html=True,
             )
             ollama_model = st.text_input("MODEL TAG", value="gemma2:2b")
@@ -625,12 +679,11 @@ with st.sidebar:
         active_token = None
         model_choice = ollama_model
 
-    st.markdown("---")
     st.markdown(
         """
-        <div style="font-weight: 900; font-size: 0.82rem; text-transform: uppercase; text-align: center; color: #000;">
-            DEV Community Hacktoberfest 2026<br>
-            <strong>Side Hustle Challenge • Week 2</strong>
+        <div style="font-weight: 900; font-size: 0.78rem; text-transform: uppercase; text-align: center; color: #000; margin-top: 14px; border-top: 2px solid #000; padding-top: 10px;">
+            DEV Hacktoberfest 2026<br>
+            <strong>Side Hustle Challenge</strong>
         </div>
         """,
         unsafe_allow_html=True,
@@ -642,15 +695,18 @@ with st.sidebar:
 st.markdown(
     """
     <div class="nb-hero">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;">
             <div>
+                <div style="display: inline-block; background-color: #000; color: #FFE600 !important; font-weight: 900; font-size: 0.78rem; padding: 3px 8px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.08em;">
+                    ★ OPEN-WEIGHT AI • SIDE HUSTLE SUITE ★
+                </div>
                 <h1 class="nb-hero-title">⚡ SELLSMART MINI</h1>
                 <div class="nb-hero-subtitle">
-                    AI-POWERED E-COMMERCE COPYWRITER FOR SIDE HUSTLERS & CREATORS
+                    TURBOCHARGE YOUR ETSY, SHOPIFY & EBAY PRODUCT LISTINGS IN SECONDS
                 </div>
             </div>
             <div>
-                <span class="nb-badge-pill">NEO-BRUTALIST EDITION</span>
+                <span class="nb-badge-pill">NEO-BRUTALIST V2</span>
             </div>
         </div>
     </div>
@@ -659,30 +715,41 @@ st.markdown(
 )
 
 # -----------------------------------------------------------------------------
-# Sample Preset Controls (Sticker Style)
+# Dedicated Quick Preset Command Bar
 # -----------------------------------------------------------------------------
-preset_cols = st.columns([2, 1, 1])
+st.markdown(
+    """
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+        <span class="nb-sticker" style="background-color: #FFE600; margin: 0; font-size: 0.95rem;">⚡ 1-CLICK DEMO PRESETS</span>
+        <span style="font-weight: 800; font-size: 0.85rem; text-transform: uppercase;">CLICK TO AUTO-FILL REALISTIC CATALOG SPECIFICATIONS</span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+preset_cols = st.columns([1, 1, 1])
 with preset_cols[0]:
-    st.markdown(
-        '<div style="font-weight: 900; font-size: 1.05rem; color: #000000; padding: 8px 0;">⚡ INSTANT PRESETS (1-CLICK FILL):</div>',
-        unsafe_allow_html=True,
-    )
-with preset_cols[1]:
-    if st.button("📓 LEATHER JOURNAL", use_container_width=True):
+    if st.button("📓 ARTISAN LEATHER JOURNAL (ETSY)", use_container_width=True):
         st.session_state["prod_name"] = SAMPLE_PRESETS["Artisan Leather Journal"]["name"]
         st.session_state["prod_features"] = SAMPLE_PRESETS["Artisan Leather Journal"]["features"]
         st.session_state["prod_audience"] = SAMPLE_PRESETS["Artisan Leather Journal"]["audience"]
         st.session_state["prod_tone"] = SAMPLE_PRESETS["Artisan Leather Journal"]["tone"]
         st.session_state["prod_platform"] = SAMPLE_PRESETS["Artisan Leather Journal"]["platform"]
         st.session_state["prod_price"] = SAMPLE_PRESETS["Artisan Leather Journal"]["price"]
-with preset_cols[2]:
-    if st.button("☕ CERAMIC DESK MUG", use_container_width=True):
+with preset_cols[1]:
+    if st.button("☕ NORDIC CERAMIC MUG (SHOPIFY)", use_container_width=True):
         st.session_state["prod_name"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["name"]
         st.session_state["prod_features"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["features"]
         st.session_state["prod_audience"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["audience"]
         st.session_state["prod_tone"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["tone"]
         st.session_state["prod_platform"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["platform"]
         st.session_state["prod_price"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["price"]
+with preset_cols[2]:
+    if st.button("🧹 CLEAR FORM FIELDS", use_container_width=True):
+        st.session_state["prod_name"] = ""
+        st.session_state["prod_features"] = ""
+        st.session_state["prod_audience"] = ""
+        st.session_state["prod_price"] = "45.00"
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -704,7 +771,7 @@ with form_col1:
         product_features = st.text_area(
             "KEY SPECIFICATIONS & FEATURES *",
             value=st.session_state.get("prod_features", ""),
-            height=170,
+            height=180,
             placeholder=(
                 "- Hand-stitched full-grain Italian leather cover\n"
                 "- 200 unlined cotton deckle-edge pages\n"
@@ -864,7 +931,7 @@ if "last_result" in st.session_state:
                 <div class="nb-store-title">{title_text}</div>
                 <div class="nb-store-price-tag">${item_price} USD</div>
                 <div style="font-weight: 900; margin-bottom: 16px; color: #008060;">
-                    ● IN STOCK — READY TO SHIP
+                    ● IN STOCK — READY TO SHIP TODAY
                 </div>
                 <div class="nb-btn-cart">🛒 ADD TO CART</div>
                 <div style="border-top: 3.5px solid #000; padding-top: 18px; margin-top: 18px; font-size: 1.05rem; line-height: 1.6; font-weight: 600; color: #000;">
@@ -883,23 +950,24 @@ if "last_result" in st.session_state:
 
     # TAB 2: Merchant Copy Tools
     with tab_copy:
-        st.markdown('<div class="nb-card-header nb-card-header-yellow">1. PRODUCT TITLE</div>', unsafe_allow_html=True)
-        st.text_input("Copy Title", value=title_text, label_visibility="collapsed")
+        with st.container(border=True):
+            st.markdown('<div class="nb-card-header nb-card-header-yellow">1. PRODUCT TITLE</div>', unsafe_allow_html=True)
+            st.text_input("Copy Title", value=title_text, label_visibility="collapsed")
 
-        st.markdown('<div class="nb-card-header nb-card-header-cyan">2. PRODUCT DESCRIPTION</div>', unsafe_allow_html=True)
-        st.text_area("Copy Description", value=desc_text, height=180, label_visibility="collapsed")
+            st.markdown('<div class="nb-card-header nb-card-header-cyan">2. PRODUCT DESCRIPTION</div>', unsafe_allow_html=True)
+            st.text_area("Copy Description", value=desc_text, height=180, label_visibility="collapsed")
 
-        st.markdown('<div class="nb-card-header nb-card-header-green">3. COMMA-SEPARATED TAGS</div>', unsafe_allow_html=True)
-        st.text_input("Copy Tags", value=", ".join(clean_tags), label_visibility="collapsed")
+            st.markdown('<div class="nb-card-header nb-card-header-green">3. COMMA-SEPARATED TAGS</div>', unsafe_allow_html=True)
+            st.text_input("Copy Tags", value=", ".join(clean_tags), label_visibility="collapsed")
 
-        with st.expander("📄 EXPORT COMPLETE MARKDOWN"):
-            full_export = (
-                f"# {title_text}\n\n"
-                f"**Price:** ${item_price} USD\n\n"
-                f"## Description\n{desc_text}\n\n"
-                f"## Tags\n{', '.join(clean_tags)}\n"
-            )
-            st.code(full_export, language="markdown")
+            with st.expander("📄 EXPORT COMPLETE MARKDOWN"):
+                full_export = (
+                    f"# {title_text}\n\n"
+                    f"**Price:** ${item_price} USD\n\n"
+                    f"## Description\n{desc_text}\n\n"
+                    f"## Tags\n{', '.join(clean_tags)}\n"
+                )
+                st.code(full_export, language="markdown")
 
     # TAB 3: Google SEO Snippet Preview
     with tab_seo:
