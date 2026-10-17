@@ -148,11 +148,34 @@ st.markdown(
         margin-bottom: 4px !important;
     }
 
-    /* Radio Buttons in Sidebar */
-    [data-testid="stRadio"] label p, [data-testid="stRadio"] span {
-        color: #000000 !important;
-        font-weight: 800 !important;
-        font-size: 0.88rem !important;
+    /* Radio Buttons in Sidebar - Tactile Card Buttons */
+    [data-testid="stSidebar"] div[data-testid="stRadio"] > div {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 6px !important;
+    }
+    [data-testid="stSidebar"] div[data-testid="stRadio"] label {
+        background-color: #FFFFFF !important;
+        border: 2.5px solid #000000 !important;
+        box-shadow: 3px 3px 0px #000000 !important;
+        padding: 8px 12px !important;
+        margin-bottom: 2px !important;
+        cursor: pointer !important;
+        border-radius: 0px !important;
+        transition: all 0.1s ease !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    [data-testid="stSidebar"] div[data-testid="stRadio"] label:hover {
+        background-color: #FFE600 !important;
+        transform: translate(1px, 1px) !important;
+        box-shadow: 2px 2px 0px #000000 !important;
+    }
+    [data-testid="stSidebar"] [data-testid="stSelectbox"] > div {
+        border: 3px solid #000000 !important;
+        box-shadow: 3.5px 3.5px 0px #000000 !important;
+        background-color: #FFFFFF !important;
+        border-radius: 0px !important;
     }
 
     /* =========================================================================
@@ -597,81 +620,149 @@ def parse_model_output(raw_text: str) -> Dict[str, str]:
 # Neo-Brutalist Sidebar: AI Engine & Compact Controls (No Scrollbar)
 # -----------------------------------------------------------------------------
 with st.sidebar:
+    # 1. Header Card
     st.markdown(
         """
-        <div style="background-color: #00F5A0; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-bottom: 14px;">
-            <h2 style="margin: 0; font-size: 1.35rem; font-weight: 900; text-transform: uppercase; color: #000;">⚡ AI ENGINE</h2>
+        <div style="background-color: #00F5A0; border: 3.5px solid #000; box-shadow: 4px 4px 0px #000; padding: 12px 14px; margin-bottom: 16px;">
+            <div style="font-size: 0.72rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: #000;">● CONTROL PANEL</div>
+            <h2 style="margin: 2px 0 0 0; font-size: 1.5rem; font-weight: 900; text-transform: uppercase; color: #000; line-height: 1.1;">⚡ AI ENGINE</h2>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
+    # 2. Inference Mode Radio (Styled into tactile cards)
+    st.markdown(
+        '<div style="font-weight: 900; font-size: 0.88rem; text-transform: uppercase; margin-bottom: 6px;">1. INFERENCE RUNTIME</div>',
+        unsafe_allow_html=True,
+    )
     provider = st.radio(
-        "INFERENCE MODE",
+        "1. INFERENCE RUNTIME",
         options=["Hugging Face Serverless (Cloud)", "Local Ollama (100% Offline)"],
-        help="Select between free cloud serverless inference or 100% offline local inference.",
+        label_visibility="collapsed",
     )
 
+    st.markdown("<div style='height: 10px;'></div>", unsafe_allow_html=True)
+
+    # 3. Model Selector & Spec Card
     if provider == "Hugging Face Serverless (Cloud)":
+        st.markdown(
+            '<div style="font-weight: 900; font-size: 0.88rem; text-transform: uppercase; margin-bottom: 6px;">2. OPEN-WEIGHT MODEL</div>',
+            unsafe_allow_html=True,
+        )
         model_choice = st.selectbox(
-            "OPEN-WEIGHT MODEL",
+            "2. OPEN-WEIGHT MODEL",
             options=list(OPEN_WEIGHT_MODELS.keys()),
             index=0,
             format_func=lambda m: f"{OPEN_WEIGHT_MODELS[m]['name']}",
+            label_visibility="collapsed",
         )
         selected_model_meta = OPEN_WEIGHT_MODELS[model_choice]
 
         st.markdown(
             f"""
-            <div style="background-color: {selected_model_meta['color']}; border: 2.5px solid #000; box-shadow: 3px 3px 0px #000; padding: 8px 12px; margin: 8px 0;">
-                <div style="font-weight: 900; font-size: 0.85rem; color: #000;">{selected_model_meta['badge']}</div>
-                <div style="font-size: 0.8rem; font-weight: 800; color: #000; margin-top: 2px;">{selected_model_meta['params']} • {selected_model_meta['license']}</div>
+            <div style="background-color: {selected_model_meta['color']}; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-top: 8px; margin-bottom: 14px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-weight: 900; font-size: 0.82rem; text-transform: uppercase; color: #000;">{selected_model_meta['badge']}</span>
+                    <span style="background: #000; color: #FFF; font-weight: 900; font-size: 0.72rem; padding: 2px 6px;">{selected_model_meta['params']}</span>
+                </div>
+                <div style="font-size: 0.76rem; font-weight: 800; color: #111;">
+                    LICENSE: {selected_model_meta['license']}
+                </div>
+                <div style="font-size: 0.73rem; font-weight: 700; color: #222; margin-top: 4px; line-height: 1.3;">
+                    {selected_model_meta['description']}
+                </div>
             </div>
             """,
             unsafe_allow_html=True,
         )
 
+        # 4. API Credentials Section
+        st.markdown(
+            '<div style="font-weight: 900; font-size: 0.88rem; text-transform: uppercase; margin-bottom: 6px;">3. API CREDENTIALS</div>',
+            unsafe_allow_html=True,
+        )
         detected_token = resolve_api_token("")
         if detected_token:
             st.markdown(
-                '<div class="nb-sticker" style="background-color: #00F5A0; width: 100%; text-align: center; margin: 6px 0;">✅ TOKEN DETECTED</div>',
+                """
+                <div style="background-color: #00F5A0; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 900; font-size: 0.82rem; color: #000;">🔑 HF TOKEN</span>
+                        <span style="background: #000; color: #00F5A0; font-weight: 900; font-size: 0.72rem; padding: 2px 6px;">● ACTIVE</span>
+                    </div>
+                    <div style="font-size: 0.76rem; font-weight: 800; margin-top: 3px; color: #000;">
+                        Ready: Loaded from .env
+                    </div>
+                </div>
+                """,
                 unsafe_allow_html=True,
             )
+            with st.expander("⚙️ OVERRIDE TOKEN"):
+                manual_token = st.text_input(
+                    "Override Token",
+                    type="password",
+                    placeholder="hf_xxxxxxxxxxxxxxxx",
+                    label_visibility="collapsed",
+                )
+                active_token = resolve_api_token(manual_token)
         else:
             st.markdown(
-                '<div class="nb-sticker" style="background-color: #FFE600; width: 100%; text-align: center; margin: 6px 0;">⚠️ NO TOKEN FOUND</div>',
+                """
+                <div style="background-color: #FFE600; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-bottom: 8px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 900; font-size: 0.82rem; color: #000;">🔑 TOKEN NEEDED</span>
+                        <span style="background: #FF66C4; color: #000; font-weight: 900; font-size: 0.72rem; padding: 2px 6px;">FREE</span>
+                    </div>
+                    <div style="font-size: 0.76rem; font-weight: 800; margin-top: 3px; color: #111;">
+                        Paste your free Hugging Face token:
+                    </div>
+                </div>
+                """,
                 unsafe_allow_html=True,
             )
-
-        manual_token = st.text_input(
-            "OVERRIDE TOKEN",
-            type="password",
-            placeholder="hf_xxxxxxxxxxxxxxxx",
-            help="Session memory only. Never committed.",
-        )
-
-        with st.expander("❓ GET FREE TOKEN"):
-            st.markdown(
-                """
-                1. Sign up at [huggingface.co](https://huggingface.co/join).
-                2. Create a **Read** token at [Tokens](https://huggingface.co/settings/tokens).
-                3. Add `HF_TOKEN=hf_...` in `.env`.
-                """
+            manual_token = st.text_input(
+                "Paste HF Token",
+                type="password",
+                placeholder="hf_xxxxxxxxxxxxxxxx",
+                label_visibility="collapsed",
             )
-        active_token = resolve_api_token(manual_token)
+            with st.expander("❓ GET FREE TOKEN (30s)"):
+                st.markdown(
+                    """
+                    1. Create free account at [huggingface.co](https://huggingface.co/join).
+                    2. Go to [Access Tokens](https://huggingface.co/settings/tokens).
+                    3. Generate a **Read** token.
+                    4. Paste above or put in `.env`.
+                    """
+                )
+            active_token = resolve_api_token(manual_token)
+
     else:
+        st.markdown(
+            '<div style="font-weight: 900; font-size: 0.88rem; text-transform: uppercase; margin-bottom: 6px;">2. LOCAL OLLAMA RUNTIME</div>',
+            unsafe_allow_html=True,
+        )
         ollama_host = st.text_input("HOST URL", value="http://localhost:11434")
 
         installed_models = get_installed_ollama_models(ollama_host)
         if installed_models:
             st.markdown(
-                f'<div class="nb-sticker" style="background-color: #00F5A0; width: 100%; text-align: center; margin-bottom: 6px;">● ONLINE ({len(installed_models)} MODELS)</div>',
+                f"""
+                <div style="background-color: #00F5A0; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 8px 12px; margin-bottom: 8px;">
+                    <span style="font-weight: 900; font-size: 0.82rem; color: #000;">● OLLAMA ONLINE ({len(installed_models)} MODELS)</span>
+                </div>
+                """,
                 unsafe_allow_html=True,
             )
             ollama_model = st.selectbox("INSTALLED MODEL", options=installed_models, index=0)
         else:
             st.markdown(
-                '<div class="nb-sticker" style="background-color: #FF66C4; width: 100%; text-align: center; margin-bottom: 6px;">⚠️ NO MODELS FOUND</div>',
+                """
+                <div style="background-color: #FF66C4; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 8px 12px; margin-bottom: 8px;">
+                    <span style="font-weight: 900; font-size: 0.82rem; color: #000;">⚠️ OLLAMA NOT DETECTED</span>
+                </div>
+                """,
                 unsafe_allow_html=True,
             )
             ollama_model = st.text_input("MODEL TAG", value="gemma2:2b")
@@ -679,11 +770,13 @@ with st.sidebar:
         active_token = None
         model_choice = ollama_model
 
+    # 5. Footer Hacktoberfest Stamp Card
     st.markdown(
         """
-        <div style="font-weight: 900; font-size: 0.78rem; text-transform: uppercase; text-align: center; color: #000; margin-top: 14px; border-top: 2px solid #000; padding-top: 10px;">
-            DEV Hacktoberfest 2026<br>
-            <strong>Side Hustle Challenge</strong>
+        <div style="background-color: #FFFFFF; border: 3px solid #000; box-shadow: 3.5px 3.5px 0px #000; padding: 10px 12px; margin-top: 14px; text-align: center;">
+            <div style="font-size: 0.72rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: #000;">🏆 DEV HACKTOBERFEST 2026</div>
+            <div style="font-size: 0.88rem; font-weight: 900; margin: 2px 0; color: #000;">WEEK 2: SIDE HUSTLE</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: #444;">OPEN-WEIGHT AI CHALLENGE</div>
         </div>
         """,
         unsafe_allow_html=True,
