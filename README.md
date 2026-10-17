@@ -25,12 +25,14 @@ However, copywriting and search engine optimization (SEO) present major hurdles:
 
 ## 🌟 Key Features
 
-- **Single-Page Workflow:** Minimal, modern interface with zero clutter or multi-step wizards.
-- **Open-Weight AI Generation:** Real model inference using open-weight architectures (Google Gemma 2, Meta Llama 3.2, Qwen 2.5). No hardcoded mock templates.
+- **Neo-Brutalism Design System:** Distinctive high-contrast aesthetic featuring thick 3.5px black borders, unblurred hard drop-shadows (`box-shadow: 6px 6px 0px #000`), vibrant electric palette (Cyber Yellow `#FFE600`, Mint Green `#00F5A0`, Hot Pink `#FF66C4`, Electric Cyan `#00E5FF`), and retro sticker tags.
+- **🛍️ Live Storefront Mockup Preview (PDP):** Visualizes how generated copy, price tags, and narrative styling render on an actual e-commerce product page, complete with a bold *"Add to Cart"* action.
+- **🔍 Google Search Snippet Preview:** Real-time search engine preview displaying page title, product URL slug, and meta description snippet.
+- **Open-Weight AI Generation:** Real model inference using open-weight architectures (Google Gemma 2, Meta Llama 3.2, Qwen 2.5). No mock hardcoding.
 - **Dual Inference Providers:**
   - *Cloud Serverless (Default):* Free Hugging Face Serverless Inference API (requires only a free HF access token, no GPU required).
   - *Local Offline:* 100% offline inference with local Ollama (`localhost:11434`), zero tokens or cloud dependency needed.
-- **Copy-Friendly Outputs:** Formatted blocks for instant 1-click clipboard copying:
+- **Copy-Friendly Merchant Tools:** Formatted blocks for instant 1-click clipboard copying:
   - 📌 High-ranking, keyword-rich Product Title (under 90 chars).
   - 📝 Multi-paragraph persuasive Product Description highlighting materials, benefits, and specifications.
   - 🏷️ Visual badge chips + comma-separated SEO keyword list.
