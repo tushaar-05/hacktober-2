@@ -102,9 +102,9 @@ st.markdown(
         color: #000000 !important;
     }
 
-    /* Force all text, paragraphs, spans, and labels to pure bold black */
-    p, span, div, h1, h2, h3, h4, h5, h6, strong, em {
-        color: #000000 !important;
+    /* Typography & Contrast */
+    p, h1, h2, h3, h4, h5, h6, strong, em {
+        color: #000000;
     }
 
     /* =========================================================================
@@ -788,9 +788,9 @@ with st.sidebar:
 st.markdown(
     """
     <div class="nb-hero">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px;">
-            <div>
-                <div style="display: inline-block; background-color: #000; color: #FFE600 !important; font-weight: 900; font-size: 0.78rem; padding: 3px 8px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.08em;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div style="flex: 1 1 500px;">
+                <div style="display: inline-block; background-color: #FFFFFF; color: #000000 !important; font-weight: 900; font-size: 0.8rem; padding: 4px 10px; border: 2.5px solid #000; box-shadow: 2.5px 2.5px 0px #000; margin-bottom: 8px; text-transform: uppercase;">
                     ★ OPEN-WEIGHT AI • SIDE HUSTLE SUITE ★
                 </div>
                 <h1 class="nb-hero-title">⚡ SELLSMART MINI</h1>
@@ -798,8 +798,22 @@ st.markdown(
                     TURBOCHARGE YOUR ETSY, SHOPIFY & EBAY PRODUCT LISTINGS IN SECONDS
                 </div>
             </div>
-            <div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
                 <span class="nb-badge-pill">NEO-BRUTALIST V2</span>
+                <div style="display: flex; gap: 8px;">
+                    <div style="background: #FFFFFF; border: 2.5px solid #000; box-shadow: 2.5px 2.5px 0px #000; padding: 6px 12px; text-align: center;">
+                        <div style="font-weight: 900; font-size: 1.15rem; line-height: 1; color: #000;">3</div>
+                        <div style="font-weight: 900; font-size: 0.68rem; text-transform: uppercase; color: #000;">MODELS</div>
+                    </div>
+                    <div style="background: #00F5A0; border: 2.5px solid #000; box-shadow: 2.5px 2.5px 0px #000; padding: 6px 12px; text-align: center;">
+                        <div style="font-weight: 900; font-size: 1.15rem; line-height: 1; color: #000;">$0</div>
+                        <div style="font-weight: 900; font-size: 0.68rem; text-transform: uppercase; color: #000;">FEES</div>
+                    </div>
+                    <div style="background: #FF66C4; border: 2.5px solid #000; box-shadow: 2.5px 2.5px 0px #000; padding: 6px 12px; text-align: center;">
+                        <div style="font-weight: 900; font-size: 1.15rem; line-height: 1; color: #000;">100%</div>
+                        <div style="font-weight: 900; font-size: 0.68rem; text-transform: uppercase; color: #000;">PRIVATE</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -812,9 +826,9 @@ st.markdown(
 # -----------------------------------------------------------------------------
 st.markdown(
     """
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
-        <span class="nb-sticker" style="background-color: #FFE600; margin: 0; font-size: 0.95rem;">⚡ 1-CLICK DEMO PRESETS</span>
-        <span style="font-weight: 800; font-size: 0.85rem; text-transform: uppercase;">CLICK TO AUTO-FILL REALISTIC CATALOG SPECIFICATIONS</span>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+        <span class="nb-sticker" style="background-color: #FFE600; margin: 0; font-size: 0.88rem;">⚡ 1-CLICK DEMO CATALOG PRESETS</span>
+        <span style="font-weight: 800; font-size: 0.8rem; text-transform: uppercase; color: #333;">CLICK ANY PRESET TO TEST WITH REAL-WORLD SPECS</span>
     </div>
     """,
     unsafe_allow_html=True,
@@ -822,7 +836,7 @@ st.markdown(
 
 preset_cols = st.columns([1, 1, 1])
 with preset_cols[0]:
-    if st.button("📓 ARTISAN LEATHER JOURNAL (ETSY)", use_container_width=True):
+    if st.button("📓 LEATHER JOURNAL (ETSY)", use_container_width=True):
         st.session_state["prod_name"] = SAMPLE_PRESETS["Artisan Leather Journal"]["name"]
         st.session_state["prod_features"] = SAMPLE_PRESETS["Artisan Leather Journal"]["features"]
         st.session_state["prod_audience"] = SAMPLE_PRESETS["Artisan Leather Journal"]["audience"]
@@ -830,7 +844,7 @@ with preset_cols[0]:
         st.session_state["prod_platform"] = SAMPLE_PRESETS["Artisan Leather Journal"]["platform"]
         st.session_state["prod_price"] = SAMPLE_PRESETS["Artisan Leather Journal"]["price"]
 with preset_cols[1]:
-    if st.button("☕ NORDIC CERAMIC MUG (SHOPIFY)", use_container_width=True):
+    if st.button("☕ CERAMIC MUG (SHOPIFY)", use_container_width=True):
         st.session_state["prod_name"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["name"]
         st.session_state["prod_features"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["features"]
         st.session_state["prod_audience"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["audience"]
@@ -838,13 +852,13 @@ with preset_cols[1]:
         st.session_state["prod_platform"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["platform"]
         st.session_state["prod_price"] = SAMPLE_PRESETS["Ergonomic Ceramic Mug"]["price"]
 with preset_cols[2]:
-    if st.button("🧹 CLEAR FORM FIELDS", use_container_width=True):
+    if st.button("🧹 CLEAR / RESET FORM", use_container_width=True):
         st.session_state["prod_name"] = ""
         st.session_state["prod_features"] = ""
         st.session_state["prod_audience"] = ""
         st.session_state["prod_price"] = "45.00"
 
-st.markdown("<br>", unsafe_allow_html=True)
+st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
 # Input Form Section (Wrapped in Neo-Brutalist Boxed Containers)
